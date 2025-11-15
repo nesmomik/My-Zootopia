@@ -30,22 +30,29 @@ def load_data(file_path):
 
 
 def format_data():
-    """Creates and returns a string from the data"""
+    """Aggregate and returns a string from the data"""
     animals_data = load_data(JSON_DATA_FILE)
 
     data_string = ''
 
     for animal in animals_data:
-        data_string += '<li class="cards__item">'
-        data_string += f'<div class="card__title">{animal.get('name')}</div>\n'
-        data_string += '<p class="card__text">'
-        if animal.get("characteristics").get("diet") is not None:
-            data_string += f"<strong>Diet:</strong> {animal.get('characteristics').get('diet')}<br/>\n"
-        data_string += f"<strong>Location:</strong> {animal.get('locations')[0]}<br/>\n"
-        if animal.get("characteristics").get("type") is not None:
-            data_string += f"<strong>Type:</strong> {animal.get('characteristics').get('type')}<br/>\n"
-        data_string += '</li>'
+        data_string += serialize_animal(animal)
 
+    return data_string
+
+
+def serialize_animal(animal):
+    data_string = ''
+    data_string += '<li class="cards__item">'
+    data_string += f'<div class="card__title">{animal.get('name')}</div>\n'
+    data_string += '<p class="card__text">'
+    if animal.get("characteristics").get("diet") is not None:
+        data_string += f"<strong>Diet:</strong> {animal.get('characteristics').get('diet')}<br/>\n"
+    data_string += f"<strong>Location:</strong> {animal.get('locations')[0]}<br/>\n"
+    if animal.get("characteristics").get("type") is not None:
+        data_string += f"<strong>Type:</strong> {animal.get('characteristics').get('type')}<br/>\n"
+    data_string += '</li>'
+    
     return data_string
 
 
