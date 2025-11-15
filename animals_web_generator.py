@@ -11,10 +11,10 @@ def read_template(file_path):
     """Returns the content of the template file as string"""
     with open(file_path, "r") as handle:
         return handle.read()
-        
+
 
 def format_data():
-    """ Creates and returns a string from the data"""
+    """Creates and returns a string from the data"""
     animals_data = load_data("animals_data.json")
 
     data_string = ""
@@ -26,14 +26,18 @@ def format_data():
         data_string += f"Location: {animal.get('locations')[0]}\n"
         if animal.get("characteristics").get("type") is not None:
             data_string += f"Type: {animal.get('characteristics').get('type')}\n"
-    
+
     return data_string
-    
+
+
+def insert_data():
+    return read_template("animals_template.html").replace(
+        "__REPLACE_ANIMALS_INFO__", format_data()
+    )
+
 
 def main():
-
-    print(format_data())
-    print(read_template("animals_template.html"))
+    print(insert_data())
 
 
 if __name__ == "__main__":
