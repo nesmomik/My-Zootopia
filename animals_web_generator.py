@@ -1,16 +1,28 @@
 import json
 
 
-def load_data(file_path):
-    """Returns the date from the json file as dict"""
-    with open(file_path, "r") as handle:
-        return json.load(handle)
-
-
 def read_template(file_path):
     """Returns the content of the template file as string"""
     with open(file_path, "r") as handle:
         return handle.read()
+
+
+def create_html_string():
+    return read_template("animals_template.html").replace(
+        "__REPLACE_ANIMALS_INFO__", format_data()
+    )
+
+
+def write_html(file_path, html_string):
+    """Returns the content of the template file as string"""
+    with open(file_path, "w") as handle:
+        handle.write(html_string)
+
+
+def load_data(file_path):
+    """Returns the date from the json file as dict"""
+    with open(file_path, "r") as handle:
+        return json.load(handle)
 
 
 def format_data():
@@ -30,15 +42,8 @@ def format_data():
     return data_string
 
 
-def insert_data():
-    return read_template("animals_template.html").replace(
-        "__REPLACE_ANIMALS_INFO__", format_data()
-    )
-
-
 def main():
-    print(insert_data())
-
+    write_html("animals.html", create_html_string())
 
 if __name__ == "__main__":
     main()
