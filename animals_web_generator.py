@@ -48,25 +48,25 @@ def serialize_animal(animal):
     """wraps data retrieved from a single object in html code"""
     data_string = ""
     # add html and data to output string
-    data_string += '<li class="cards__item">'
-    data_string += f'<div class="card__title">{animal.get("name")}</div>\n'
-    data_string += '<div class="card__text">\n<ul>\n'
-    data_string += f"<li><strong>Scientific Name:</strong> {animal.get('taxonomy').get('scientific_name')}</li>\n"
+    data_string += '\t' * 3 + '<li class="cards__item">\n'
+    data_string += '\t' * 4 + f'<div class="card__title">{animal.get("name")}</div>\n'
+    data_string += '\t' * 5 + '<div class="card__text">\n' + '\t' * 6 + '<ul>\n'
+    data_string += '\t' * 7 + f"<li><strong>Scientific Name:</strong> {animal.get('taxonomy').get('scientific_name')}</li>\n"
     if animal.get("characteristics").get("diet") is not None:
-        data_string += f"<li><strong>Diet:</strong> {animal.get('characteristics').get('diet')}</li>\n"
-    data_string += f"<li><strong>Location(s):</strong> {animal.get('locations')[0]}"
+        data_string += '\t' * 7 + f"<li><strong>Diet:</strong> {animal.get('characteristics').get('diet')}</li>\n"
+    data_string += '\t' * 7 + f"<li><strong>Location(s):</strong> {animal.get('locations')[0]}"
     for i in range(1, len(animal.get("locations"))):
         data_string += f", {animal.get('locations')[i]}"
     data_string += "</li>\n"
     if animal.get("characteristics").get("weight") is not None:
-        data_string += f"<li><strong>Weight:</strong> {animal.get('characteristics').get('weight')}</li>\n"
+        data_string += '\t' * 7 + f"<li><strong>Weight:</strong> {animal.get('characteristics').get('weight')}</li>\n"
     if animal.get("characteristics").get("type") is not None:
-        data_string += f"<li><strong>Type:</strong> {animal.get('characteristics').get('type')}</li>\n"
+        data_string += '\t' * 7 + f"<li><strong>Type:</strong> {animal.get('characteristics').get('type')}</li>\n"
     if animal.get("characteristics").get("temperament") is not None:
-        data_string += f"<li><strong>Temperament:</strong> {animal.get('characteristics').get('temperament')}</li>\n"
+        data_string += '\t' * 7 + f"<li><strong>Temperament:</strong> {animal.get('characteristics').get('temperament')}</li>\n"
     if animal.get("characteristics").get("slogan") is not None:
-        data_string += f"<li><strong>Slogan:</strong> {animal.get('characteristics').get('slogan')}</li>\n"
-    data_string += "</ul></div></li>"
+        data_string += '\t' * 7 + f"<li><strong>Slogan:</strong> {animal.get('characteristics').get('slogan')}</li>\n"
+    data_string += '\t' * 6 + '</ul>\n' + '\t' * 5 + '</div>\n' + '\t' * 4 + '</li>\n'
 
     return data_string
 
